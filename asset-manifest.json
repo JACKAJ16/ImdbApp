@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ImdbApp/static/css/main.e8aba8f6.chunk.css",
+    "main.js": "/ImdbApp/static/js/main.72e5a896.chunk.js",
+    "main.js.map": "/ImdbApp/static/js/main.72e5a896.chunk.js.map",
+    "runtime-main.js": "/ImdbApp/static/js/runtime-main.a662af9f.js",
+    "runtime-main.js.map": "/ImdbApp/static/js/runtime-main.a662af9f.js.map",
+    "static/js/2.eb8c21e0.chunk.js": "/ImdbApp/static/js/2.eb8c21e0.chunk.js",
+    "static/js/2.eb8c21e0.chunk.js.map": "/ImdbApp/static/js/2.eb8c21e0.chunk.js.map",
+    "index.html": "/ImdbApp/index.html",
+    "precache-manifest.31374864f79277c913c9dce9190f6e1d.js": "/ImdbApp/precache-manifest.31374864f79277c913c9dce9190f6e1d.js",
+    "service-worker.js": "/ImdbApp/service-worker.js",
+    "static/css/main.e8aba8f6.chunk.css.map": "/ImdbApp/static/css/main.e8aba8f6.chunk.css.map",
+    "static/js/2.eb8c21e0.chunk.js.LICENSE.txt": "/ImdbApp/static/js/2.eb8c21e0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a662af9f.js",
+    "static/js/2.eb8c21e0.chunk.js",
+    "static/css/main.e8aba8f6.chunk.css",
+    "static/js/main.72e5a896.chunk.js"
+  ]
+}
