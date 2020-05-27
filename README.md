@@ -4,6 +4,8 @@ Search for any movie and get information about it.
 
 Also search suggestions are included.
 
+Demo: https://jackaj16.github.io/ImdbApp/
+
 ### `How to start this app on your computer`
 
 - Clone or download directory
