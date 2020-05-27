@@ -1,23 +1,40 @@
-.suggestions {
-	display: none;
-	overflow-y: auto;
-	height:  155px;
-	width: 62.8%;
-	text-align: left;
+.suggestions-container {
+	width: 75%;
+	margin: 0 auto;
 	position: absolute;
-	margin-top: -20px;
+	display: block;
 }
 
-.suggestions li {
-	list-style: none;
-	padding: 5px 15px;
-	background: rgba(255, 255, 255, .7)
-}
-
-
-.suggestions li:hover {
-	background: #58ACFA;
+.suggestions input {
+	border: none;
+	width: 100%;
 	color: #fff;
-	cursor: pointer;
+	font-size: 16px;
 }
 
+.suggestions input:first-child {
+	margin-top: 5px;
+}
+
+.suggestions input:hover {
+	cursor: pointer;
+	background-color: green;
+}
+
+.suggestions {
+	max-width: 65%;
+	background-color: rgba(0,0,0,.9);
+	text-align: left;
+	float: right;
+}
+
+@media (max-width: 580px) { 
+  
+  .suggestions-container {
+  	width: 90%;
+  }
+
+  .suggestions {
+  	max-width: 100%;
+  }
+}

@@ -1,16 +1,34 @@
-.App {
-  text-align: center;
+.main {
+  background-color: rgba(0,0,0,.7);
   height: 100vh;
-  padding-top: 70px;
+  z-index: 999;
+  padding-top: 45px;
   width: 100%;
-  background: rgba(0, 0, 0, .5)
 }
 
+.wrapper {
+  width: 75%;
+  margin: 0 auto;
+}
 
+.logo {
+  max-width: 120px;
+  position: absolute;
+  float: left;
+}
 
+@media (max-width: 580px) {
 
+  .logo{
+    position: static;
+    margin: 0 auto;
+    display: block;
+    float: none;
+  }
 
-
-
+  .wrapper {
+    width: 90%;
+  }
+}
 
 

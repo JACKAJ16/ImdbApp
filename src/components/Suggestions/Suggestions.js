@@ -1,33 +1,21 @@
 import React from 'react';
-import "./Suggestions.css"
+import "./Suggestions.css";
+
 
 
 const Suggestions = (props) => {
-	
-	const matches = props.matches
+  const options = props.results.slice(0, 5).map(r => (
+    <input key={r.id} value={r.original_title} name={r.id} readOnly onClick={props.fetchMovie}/>   
+  ))
+  
+  return (
 
-	.map((val) => {
-		return (
-			
-				<li id={val.id} key={val.id} onClick={props.fetchID}>
-					{val.name ? val.name + ", " : null}
-					{val.state ? val.state + ", " : null}
-					{val.country ? val.country : null}
-				</li>	
-			
-			)
-	})
-	.slice(0, 50)
+	  <div className="suggestions-container"> 
+	  	<div className="suggestions">{props.isLoaded === true ? options : null}</div>
+	  </div>
 
+  )
+}
 
-	//Using inline styles to hide or show Suggestions box
-	let styles = matches.length === 0 ? {display: "none"} : matches.length > 5 ? {height: "300px", display: "block"} : matches.length > 0 ? {display: "block"} : null
-	
-	return (
-			<ul style={styles} className="suggestions">
-				{props.isLoaded ? matches : null}
-			</ul>
-		)
-	}
 
 export default Suggestions

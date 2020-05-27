@@ -1,0 +1,32 @@
+* {
+	box-sizing: border-box;
+}
+
+.searchForm  {
+	width: 100%;
+	margin: 0 auto;
+	text-align: right;
+	margin-bottom: 35px;
+}
+
+.searchForm input {
+	width: 65%;
+	padding: 10px;
+	border: none;
+	border-bottom: 2px solid #fff;	
+	outline: none;
+	background: transparent;
+	color: #fff;
+	font-size: 15px;
+}
+
+@media (max-width: 580px) { 
+  .searchForm {
+  	width: 100%;
+  }
+
+  .searchForm input {
+  	width: 100%;
+  }
+  
+}

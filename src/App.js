@@ -1,140 +1,102 @@
 import React from 'react';
 import './App.css';
-import Search from "./components/Search/Search";
-import Weather from "./components/Weather/Weather";
 import axios from "axios";
+import Card from "./components/Card/Card";
+import MovieSearch from "./components/MovieSearch/MovieSearch";
 
-
-const API_KEY = "6c2847c395792f9cf85a804db24ced16";
+const tmdb = require('./components/assets/tmdb.png');
+const API_KEY = "061c7695df470dcccd241c1baabf1508";
 
 class App extends React.Component {
   
   constructor(props) {
     super(props)
     this.state = {
-      main: "",
-      description: "",
-      temperature: "",
-      temp_max: "",
-      temp_min: "",
-      temp_feels: "",
-      wind: "",
-      pressure: "",
-      humidity: "",
-      id: "",
-      name: "",
-      country: "",
-      state: "",
-      isLoaded: false,
-      matches: [],
-      value: "",
-      basicBg: "BasicBg",
-      icon: "",
-      data: []
+      movieId: 11,
+      isLoaded: true,
+      original_title: "",
+      tagline: "",
+      overview: "",
+      poster: "",
+      production: "",
+      genre: "",
+      release: null,
+      vote: null,
+      runtime: null,
+      revenue: null,
+      backdrop: "",
+      data: []      
     }
+
   }
 
-
-
-//Fetching data from json file with cities id's for suggestion box
-
+//Fetching movie from the start
   componentDidMount() {
-    axios.get("https://raw.githubusercontent.com/JACKAJ16/Cities-json/master/citylist.json")
-      .then(res => {
-        this.setState({
-          data: res.data
-        })
+    this.fetchMovie(this.state.movieId);
+    if (this.state.isLoaded === false) {
+      this.setState({
+        isLoaded: true
+    })
+  }}
+
+//Updating background while movie changes
+  componentDidUpdate() {
+    document.body.style.background = '#000 url(' + 'https://image.tmdb.org/t/p/original' + this.state.backdrop + ')  no-repeat top center / cover';
+  }
+
+//Fetching movie method
+  fetchMovie = async (e) => {
+    let movieID 
+    if(e === 11) {
+      movieID = e
+    } else {
+      movieID = e.target.name;
+    }
+    const results = await axios.get(`https://api.themoviedb.org/3/movie/${movieID}?&api_key=${API_KEY}`)
+      this.setState({
+        movieId: results.data.id,
+        original_title: results.data.original_title,
+        tagline: results.data.tagline,
+        overview: results.data.overview,
+        poster: results.data.poster_path,
+        production: results.data.production_companies,
+        genre: results.data.genres,
+        release: results.data.release_date,
+        vote: results.data.vote_average,
+        runtime: results.data.runtime,
+        revenue: results.data.revenue,
+        backdrop: results.data.backdrop_path,
+        isLoaded: false
       })
   }
-
-
-
-//Background updates due to the main weather state
-
-  componentDidUpdate() {
-    const weatherBg = require(`./assets/${this.state.main !== "" ? this.state.main : this.state.basicBg }.jpg`);
-    document.body.style.background = '#000 url('+weatherBg+')  no-repeat top center / cover';
-  }
-
-
-
-
-//Fetching weather data from API 
-
-  fetchID = async(e) => {
-    e.preventDefault()
-    let cityId = e.target.id
-    
-      axios.get(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${API_KEY}&units=metric`)
-      .then(res => {
-        this.setState({
-          main: res.data.weather[0].main,
-          description: res.data.weather[0].description,
-          temperature: res.data.main.temp,
-          temp_max: res.data.main.temp_max,
-          temp_min: res.data.main.temp_min,
-          wind: res.data.wind.speed,
-          pressure: res.data.main.pressure,
-          humidity: res.data.main.humidity,
-          temp_feels: res.data.main.feels_like,
-          name: res.data.name,
-          country: res.data.sys.country,
-          state: res.data.state,
-          isLoaded: false,
-          value: "",
-          icon: res.data.weather[0].icon
-        })
-      }) 
-   
-  }
-
-
-//Suggestions box method to compare input and cities in JSON file
-  handleChange = async(e) => {    
  
-    let matches = this.state.data.filter(state => {
-      const regex = new RegExp(`^${e.target.value}`, "gi");
-      return state.name.match(regex) || state.country.match(regex);
-    })
-    
-    if (e.target.value.length === 0) {
-      matches = []
-    } else if (e.target.value.length === 1 || e.target.value.length === 2) {
-      matches = matches.slice(0, 5)
-    }
-  
-
+  toTrue = async () => {
     this.setState({
-      matches: matches
-      .sort((a, b) => { 
-            return (
-              a.name > b.name ? 1 : a.name < b.name ? -1 :  0
-              )}),
-
-      value: e.target.value,
       isLoaded: true
     })
-
   }
 
-
-
-  //Preventing page refresh while user presses search button with no suggestions on the screen
-  handleFalseSubmit(e) {
-    e.preventDefault()
+  toFalse = async (e) => {
+    this.setState({
+      isLoaded: false
+    })
   }
-    
-  
 
   render() {
+    
     return (
-      <div className="App">
-        <Search handleFalseSubmit={this.handleFalseSubmit} isLoaded={this.state.isLoaded} handleChange={this.handleChange} matches={this.state.matches} value={this.state.value} fetchID={this.fetchID} />
-        <Weather date={this.state.date} icon={this.state.icon} data={this.state} />
+      <div onClick={this.toFalse} className="main">
+        <div className="wrapper">
+          <a href="./">
+            <img className="logo" src={tmdb} alt="logo-img" />
+          </a>
+          <MovieSearch toTrue={this.toTrue} isLoaded={this.state.isLoaded} fetchMovie={this.fetchMovie} API_KEY={API_KEY}/>
+          <Card data={this.state}/>
+         </div> 
       </div>
-    );
+      );
+    }
 
   }
-}
 
 export default App;
