@@ -1,6 +1,6 @@
 ## Imdb app
 
-![ImdbApp](https://user-images.githubusercontent.com/8159055/83152604-a9457a80-a106-11ea-8e66-d6e9ccda9071.gif)
+![Imdb](https://user-images.githubusercontent.com/8159055/83153091-38529280-a107-11ea-8827-acb9d722014d.gif)
 
 App that fetching data about movies from https://www.themoviedb.org/ API
 
